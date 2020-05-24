@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 1170px;
+  height: 210px;
+  padding: 0 15px;
+  margin: 0 auto;
+  border: solid;
+}
+
+.user {
+  float: left;
+}
+
+.user-image {
+  height: 20vmin;
+  pointer-events: none;
+  padding: 10px;
+}
+
+.user-name {
+  padding: 5px;
+  margin: 0 auto;
+  border: solid;
+}
+
+.user-name p {
+  height: 20px;
+  margin: 0 auto;
+  display: block;
+}
+
+.clap-list {
+  color: #2b546a;
+  display: inline-block;
+  padding: 50px;
+}
+
+.clap-list li {
+  float: left;
+  padding: 10px;
+}
+
+.post-text {
+  width: 1000px;
+  padding: 10px;
+}
+
+.post-text textarea{
+  width: 800px;
+  height: 100px;
+  display: block;
+  float: right;
+}
+
+.post-text button{
+  float: right;
+  color: #fff;
+  width: 184px;
+  height: 48px;
+  font-size: 13px;
+  background-color: #30c8d6;
+  border: none;
+  margin-top: 10px;
+}
+
+.migi-image {
+  width: 80px;
+  float: left;
+  padding: 40px 10px;
+}
+
+.show-user-image {
+  height: 100px;
+  pointer-events: none;
+  padding: 10px;
+}
+
+.users {
+  margin-top: 20px;
+}
+
