@@ -16,6 +16,14 @@ ul {
   list-style: none;
 }
 
+.current-user {
+  background-color: #30c8d6;
+}
+
+.post {
+  background-color: #dde0e0;
+}
+
 .container {
   width: 1170px;
   height: 210px;
@@ -69,7 +77,7 @@ ul {
   float: right;
 }
 
-.post-text button{
+.post-text input{
   float: right;
   color: #fff;
   width: 184px;
