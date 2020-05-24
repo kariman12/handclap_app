@@ -53,7 +53,7 @@ class Show extends Component {
                 <div className="show-text">
                     <p>ここにテキストが入ります</p>
                     <p>ここに日付が入ります</p>
-                    <i class="fas fa-sign-language fa-3x"></i>
+                    <i class="fas fa-sign-language fa-3x clap-mark"></i>
                     <p>5</p>
                 </div>
             </div>
