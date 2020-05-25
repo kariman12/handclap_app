@@ -7,10 +7,11 @@ const CurrentUser = (props) => (
                 <img src={`${process.env.PUBLIC_URL}/panda.jpg`} className="user-image" alt="userimage" />
                 <div className="user-name">
                     <select>
-                        <option value='a'>Aさん</option>
-                        <option value='b'>Bさん</option>
-                        <option value='c'>Cさん</option>
+                    {props.userList.map((user, i) => {
+                            return <option value={i} >{user.name} </option>
+                        })};
                     </select>
+                    <p>{props.userList.name}</p>
                 </div>
             </div>
             <ul className='clap-list'>

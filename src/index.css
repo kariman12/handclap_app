@@ -20,7 +20,7 @@ ul {
   background-color: #30c8d6;
 }
 
-.post {
+.form {
   background-color: #dde0e0;
 }
 
@@ -65,19 +65,19 @@ ul {
   padding: 10px;
 }
 
-.post-text {
+.form-text {
   width: 1000px;
   padding: 10px;
 }
 
-.post-text textarea{
+.form-text textarea{
   width: 800px;
   height: 100px;
   display: block;
   float: right;
 }
 
-.post-text input{
+.form-text input{
   float: right;
   color: #fff;
   width: 184px;

@@ -1,6 +1,6 @@
 import React from 'react';
 import CurrentUser from './current_user';
-import Post from './post';
+import Form from './form';
 import Show from './show';
 
 class App extends React.Component {
@@ -8,9 +8,7 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            user_list:["Tom", "Mary", "Bob"],
-            form_text: [],
-            form_date: []
+            post_content:[]
         };
         // ?
         this.handleAdd = this.handleAdd.bind(this);
@@ -34,33 +32,36 @@ class App extends React.Component {
     handleAdd(e){
     // リダイレクト防止(?)
     e.preventDefault();
-    // フォームから受け取ったデータをオブジェクトに挿入して、stateのtodo配列に追加
-    this.state.form_text.push({title: e.target.title.value}); // まだ保存されていない
+    // フォームから受け取ったデータと現在時刻をオブジェクトに挿入して、stateのposts配列に追加
+    this.state.post_content.push({text: e.target.text.value, date: this.getNow()}); // まだ保存されていない
     // setStateを使ってstateを上書き
-    this.setState({form_text: this.state.form_text}); // 保存完了
+    this.setState({post_content: this.state.post_content}); // 保存完了
     // inputのvalueを空に
-    e.target.title.value = '';
+    e.target.text.value = '';
 
-    //現在時刻を追加
-    // console.log(this.getNow());
-    this.state.form_date.push({title: this.getNow()}); // まだ保存されていない
-    this.setState({form_date: this.state.form_date}); // 保存完了
     }
 
 
     render() {
-    return (
-        <div>
-            <h1>Handclap App</h1>
-            <CurrentUser />
-            <Post handleAdd={this.handleAdd}/>
-            <Show
-            form_texts={this.state.form_text}
-            form_dates={this.state.form_date}
-            />
-        </div>
-    );
-    }
+
+        const userList = [
+            {name: "ぱんだ", image: "`${process.env.PUBLIC_URL}/panda.jpg`"},
+            {name: "ねこ" , image: "`${process.env.PUBLIC_URL}/neko.jpg`"},
+            {name: "はりねずみ", image: "`${process.env.PUBLIC_URL}/neko.jpg`"}
+        ];
+
+
+        return (
+            <div>
+                <h1>Handclap App</h1>
+                <CurrentUser userList={userList}/>
+                <Form handleAdd={this.handleAdd}/>
+                <Show
+                post_contents={this.state.post_content}
+                />
+            </div>
+        );
+        }
 }
 
 export default App;
