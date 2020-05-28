@@ -1,4 +1,9 @@
 import React from 'react';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
 import CurrentUser from './current_user';
 import Form from './form';
 import Show from './show';
@@ -122,7 +127,16 @@ class App extends React.Component {
 
         return (
             <div>
-                <h1>Handclap App</h1>
+                <AppBar position="static" color='primary'>
+                <Toolbar>
+                    <Typography variant="h6" color="inherit">
+                    Handclap App
+                    </Typography>
+                </Toolbar>
+                </AppBar>
+
+
+                {/* <h1>Handclap App</h1> */}
 
                 <CurrentUser
                 current_user_id={this.state.current_user_id}
