@@ -16,21 +16,21 @@ ul {
   list-style: none;
 }
 
-.current-user {
+/* .current-user {
   background-color: #30c8d6;
-}
+} */
 
-.form {
+/* .form {
   background-color: #dde0e0;
-}
+} */
 
-.container {
+/* .container {
   width: 1170px;
   height: 220px;
   padding: 0 15px;
   margin: 0 auto;
   border: solid;
-}
+} */
 
 .user {
   float: left;
