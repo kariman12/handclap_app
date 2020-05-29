@@ -80,7 +80,7 @@ class App extends React.Component {
             this.setState({clap_event: this.state.clap_event}); // 保存完了
             // inputのvalueを空に
             // e.target.text.value = '';
-            // console.log(this.state.clap_event);
+            console.log(this.state.clap_event);
         }
     }
 
@@ -123,6 +123,7 @@ class App extends React.Component {
             {name: "ねこ" , image: "neko.jpg"},
             {name: "はりねずみ", image: "harinezumi.jpg"}
         ];
+
 
 
         return (

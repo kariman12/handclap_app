@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,6 +25,9 @@ class CurrentUser extends React.Component {
     }
 
     render() {
+
+        const classes = makeStyles();
+
         return(
         <div className="current-user">
             <div className="container">
@@ -33,12 +37,32 @@ class CurrentUser extends React.Component {
             <div className="user">
                     <img src={`${process.env.PUBLIC_URL}/${this.props.userList[this.props.current_user_id].image}`} className="user-image" alt={this.props.userList[this.props.current_user_id].image} />
                     <div className="user-name">
-                        <select onChange={(event) => {this.props.handleCurrentUserChange(event)}}>
+                        {/* <select onChange={(event) => {this.props.handleCurrentUserChange(event)}}>
                         {this.props.userList.map((user, i) => {
+                                console.log(user);
                                 return <option value={i}>{user.name}</option>
                             })};
-                        </select>
-                        {/* <FormControl className={classes.formControl}> */}
+                        </select> */}
+
+                        <FormControl className={classes.formControl} onChange={(event) => {this.props.handleCurrentUserChange(event)}}>
+                        {/* <FormControl className="{classes.formControl}" onChange={(event) => {this.props.handleCurrentUserChange(event)}}> */}
+                            <InputLabel id="demo-simple-select-label">User</InputLabel>
+                            <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // value={age}
+                            value={this.props.current_user_id}
+                            onChange={(event) => {this.props.handleCurrentUserChange(event)}}
+                            >
+                            {this.props.userList.map((user, i) => {
+                                // return <option value={i}>{user.name}</option>
+                                return <MenuItem value={String(i)}>{user.name}</MenuItem>
+                            })}
+                            </Select>
+                        </FormControl>
+
+
+                        {/* <FormControl className={classes.formControl}>
                         <FormControl className="{classes.formControl}">
                             <InputLabel id="demo-simple-select-label">Age</InputLabel>
                             <Select
@@ -53,9 +77,8 @@ class CurrentUser extends React.Component {
                             <MenuItem value={20}>Twenty</MenuItem>
                             <MenuItem value={30}>Thirty</MenuItem>
                             </Select>
-                        </FormControl>
+                        </FormControl> */}
 
-                        {/* <p>{this.props.userList.name}</p> */}
                     </div>
                 </div>
                 <ul className='clap-list'>
