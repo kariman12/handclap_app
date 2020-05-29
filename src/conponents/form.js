@@ -1,4 +1,6 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,6 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 class Form extends React.Component {
 
@@ -18,6 +27,9 @@ class Form extends React.Component {
     }
 
     render() {
+
+        const classes = makeStyles();
+
         return(
             <div className="form">
                 <div className = "container">
@@ -27,12 +39,27 @@ class Form extends React.Component {
                 <div className="user">
                     <img src={`${process.env.PUBLIC_URL}/${this.props.userList[this.props.to_user_id].image}`} className="user-image" alt={this.props.userList[this.props.to_user_id].image} />
                         <div className="user-name">
-                            <select onChange={(event) => {this.props.handleToUserChange(event)}}>
+                            {/* <select onChange={(event) => {this.props.handleToUserChange(event)}}>
                             {this.props.userList.map((user, i) => {
                                     return <option value={i}>{user.name}</option>
                                 })};
-                            </select>
-                            {/* <p>{this.props.userList.name}</p> */}
+                            </select> */}
+
+                            <FormControl className={classes.formControl} onChange={(event) => {this.props.handleToUserChange(event)}}>
+                            <InputLabel id="demo-simple-select-label">User</InputLabel>
+                            <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // value={age}
+                            value={this.props.to_user_id}
+                            onChange={(event) => {this.props.handleToUserChange(event)}}
+                            >
+                            {this.props.userList.map((user, i) => {
+                                return <MenuItem value={String(i)}>{user.name}</MenuItem>
+                            })}
+                            </Select>
+                        </FormControl>
+
                         </div>
                 </div>
                 <div className="form-text">
