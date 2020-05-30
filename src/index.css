@@ -32,52 +32,53 @@ ul {
   border: solid;
 } */
 
-.user {
+/* .user {
   float: left;
-}
+} */
 
-.user-image {
+/* .user-image {
   height: 20vmin;
   pointer-events: none;
   padding: 10px;
-}
+} */
 
-.user-name {
-  padding: 5px;
+/* .user-name {
+  padding: 20px;
   margin: 0 auto;
-  /* border: solid; */
-}
+  border: solid;
+} */
 
-.user-name p {
+/* .user-name p {
   height: 20px;
   margin: 0 auto;
   display: block;
-}
+} */
 
-.clap-list {
+/* .clap-list {
   color: #2b546a;
   display: inline-block;
   padding: 50px;
-}
+} */
 
-.clap-list li {
+/* .clap-list li {
   float: left;
   padding: 10px;
-}
+} */
 
-.form-text {
-  width: 1000px;
+/* .form-text {
+  width: 500px;
   padding: 10px;
-}
+  float: left;
+} */
 
-.form-text textarea{
+/* .form-text textarea{
   width: 800px;
   height: 100px;
   display: block;
   float: right;
-}
+} */
 
-.form-text input{
+/* .form-text input{
   float: right;
   color: #fff;
   width: 184px;
@@ -86,23 +87,23 @@ ul {
   background-color: #30c8d6;
   border: none;
   margin-top: 10px;
-}
+} */
 
 .migi-image {
-  width: 80px;
+  width: 50px;
   float: left;
   padding: 40px 10px;
 }
 
-.show-user-image {
+/* .show-user-image {
   height: 100px;
   pointer-events: none;
   padding: 10px;
-}
+} */
 
-.users {
+/* .users {
   margin-top: 20px;
-}
+} */
 
 .clap-mark {
   color: #fecb81;
