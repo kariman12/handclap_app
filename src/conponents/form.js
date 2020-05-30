@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles'
 
 
 import Button from '@material-ui/core/Button';
@@ -16,6 +17,51 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import TextField from '@material-ui/core/TextField';
+
+import Avatar from '@material-ui/core/Avatar'  
+
+const styles = (theme) => ({  // #1
+
+    textfield: {
+        width: "500px",
+        padding: "10px",
+        float: "left",
+        },
+
+    card: {
+        margin: "10px",
+        // backgroundColor: "#30c8d6",
+    },
+
+    user: {
+        padding: theme.spacing.unit * 5,
+        float: "left",
+    },
+
+    avatar: {
+        width: theme.spacing(15),
+        height: theme.spacing(15),
+      },
+
+    formArea: {
+        margin: "50px 0px",
+        float: "left",
+        width: "520px",
+        // backgroundColor: "#30c8d6",
+    },
+
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: "120px"
+    },
+
+    submitButton: {
+        margin: "0 10px",
+        float: "right",
+    }
+  })
+
 
 class Form extends React.Component {
 
@@ -31,22 +77,15 @@ class Form extends React.Component {
         const classes = makeStyles();
 
         return(
-            <div className="form">
-                <div className = "container">
-
-                <Card className="classes.card">
+                <Card className={this.props.classes.card}>
                 <CardContent>
-                <div className="user">
-                    <img src={`${process.env.PUBLIC_URL}/${this.props.userList[this.props.to_user_id].image}`} className="user-image" alt={this.props.userList[this.props.to_user_id].image} />
-                        <div className="user-name">
-                            {/* <select onChange={(event) => {this.props.handleToUserChange(event)}}>
-                            {this.props.userList.map((user, i) => {
-                                    return <option value={i}>{user.name}</option>
-                                })};
-                            </select> */}
+                {/* <p>投稿する</p> */}
+                <Typography variant="h5" color='primary'>投稿する</Typography>
+                <div className={this.props.classes.user}>
+                    <Avatar src={`${process.env.PUBLIC_URL}/${this.props.userList[this.props.to_user_id].image}`} alt={this.props.userList[this.props.to_user_id].image} variant='circle' className={this.props.classes.avatar}/>
 
-                            <FormControl className={classes.formControl} onChange={(event) => {this.props.handleToUserChange(event)}}>
-                            <InputLabel id="demo-simple-select-label">User</InputLabel>
+                        <FormControl className={this.props.classes.formControl} onChange={(event) => {this.props.handleToUserChange(event)}}>
+                            <InputLabel id="demo-simple-select-label">ユーザを選択</InputLabel>
                             <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -59,32 +98,38 @@ class Form extends React.Component {
                             })}
                             </Select>
                         </FormControl>
-
-                        </div>
                 </div>
-                <div className="form-text">
                     {/* <textarea type="text" onInput={props.handleAdd} /> */}
-                    <form onSubmit={this.props.handleAdd}>
-                    <textarea type="text" name="text"/>
+                    <div className={this.props.classes.formArea}>
+                    <form onSubmit={this.props.handleAdd} >
+                    {/* <textarea type="text" name="text"/> */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="text"
+                        label="褒めるメッセージを送ろう！"
+                        name="text"
+                        // autoComplete="email"
+                        autoFocus
+                        className={this.props.classes.textfield}
+                    />
                     {/* <button onClick={props.handleAdd}>投稿</button> */}
                     {/* <input type="submit" value="投稿"/> */}
-                    <Button type="submit" variant="contained" color="secondary">投稿</Button>
+                    <Button className={this.props.classes.submitButton} type="submit" variant="contained" color="secondary">投稿</Button>
                     </form>
-                </div>
+                    </div>
                 </CardContent>
                 {/* <CardActions>
                     <Button >Cancel</Button>
                     <Button variant="raised" color="primary">OK</Button>
                 </CardActions> */}
                 </Card>
-
-                </div>
-            </div>
-
         );
     }
 
 }
 
 
-export default Form;
+// export default Form;
+export default withStyles(styles)(Form);

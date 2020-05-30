@@ -1,12 +1,42 @@
 import React from 'react';
 
+import {MuiThemeProvider} from '@material-ui/core/styles'  // 追加
+import {theme} from '../theme'  // 追加
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper'
+
+import PropTypes from 'prop-types'  
+import { withStyles } from '@material-ui/core/styles'
 
 import CurrentUser from './current_user';
 import Form from './form';
 import Show from './show';
+
+const styles = (theme) => ({  // #1
+    appbar: {
+        alignItems: 'center',
+      },
+      
+    root: {
+      padding: theme.spacing.unit * 5,
+      backgroundColor: "#efebe9",
+    },
+
+    content: {
+      maxWidth: 900,
+      marginLeft  : 'auto',
+      marginRight : 'auto',
+      
+    },
+
+    textfield: {
+          margin: theme.spacing(1),
+          width: '1000px',
+        },
+  })
 
 class App extends React.Component {
 
@@ -61,12 +91,14 @@ class App extends React.Component {
     handleAdd(e) {
         // リダイレクト防止(?)
         e.preventDefault();
-        // フォームから受け取ったデータと現在時刻をオブジェクトに挿入して、stateのposts配列に追加
-        this.state.post_content.push({text: e.target.text.value, date: this.getNow(), current_user_id: this.state.current_user_id, to_user_id: this.state.to_user_id}); // まだ保存されていない
-        // setStateを使ってstateを上書き
-        this.setState({post_content: this.state.post_content}); // 保存完了
-        // inputのvalueを空に
-        e.target.text.value = '';
+        if ((e.target.text.value.length) > 4) {
+            // フォームから受け取ったデータと現在時刻をオブジェクトに挿入して、stateのposts配列に追加
+            this.state.post_content.push({text: e.target.text.value, date: this.getNow(), current_user_id: this.state.current_user_id, to_user_id: this.state.to_user_id}); // まだ保存されていない
+            // setStateを使ってstateを上書き
+            this.setState({post_content: this.state.post_content}); // 保存完了
+            // inputのvalueを空に
+            e.target.text.value = '';
+        }
     }
 
     handleAddCount(event, from_user_id, to_user_id) {
@@ -125,46 +157,49 @@ class App extends React.Component {
         ];
 
 
-
         return (
-            <div>
-                <AppBar position="static" color='primary'>
-                <Toolbar>
-                    <Typography variant="h6" color="inherit">
-                    Handclap App
-                    </Typography>
-                </Toolbar>
+                <div>
+                <MuiThemeProvider theme={theme}>
+                <AppBar position="static" color='primary' className={this.props.classes.appbar}>
+                    <Toolbar >
+                        <Typography variant="h4" color="inherit" >
+                        Handclap App
+                        </Typography>
+                    </Toolbar>
                 </AppBar>
+                <Paper>
+                    <div className={this.props.classes.root}>  
+                        <div className={this.props.classes.content}>
+                            <CurrentUser
+                            current_user_id={this.state.current_user_id}
+                            userList={userList}
+                            handleCurrentUserChange={this.handleCurrentUserChange}
+                            getCountClapable={this.getCountClapable}
+                            getCountClapped={this.getCountClapped}
+                            />
 
+                            <Form
+                            to_user_id={this.state.to_user_id}
+                            userList={userList}
+                            handleToUserChange={this.handleToUserChange}
+                            handleAdd={this.handleAdd}
+                            />
 
-                {/* <h1>Handclap App</h1> */}
-
-                <CurrentUser
-                current_user_id={this.state.current_user_id}
-                userList={userList}
-                handleCurrentUserChange={this.handleCurrentUserChange}
-                getCountClapable={this.getCountClapable}
-                getCountClapped={this.getCountClapped}
-                />
-
-                <Form
-                to_user_id={this.state.to_user_id}
-                userList={userList}
-                handleToUserChange={this.handleToUserChange}
-                handleAdd={this.handleAdd}
-                />
-
-                <Show
-                post_contents={this.state.post_content}
-                userList={userList}
-                clap_events={this.state.clap_event}
-                handleAddCount={this.handleAddCount}
-                getCountPost={this.getCountPost}
-                />
-
-            </div>
+                            <Show
+                            post_contents={this.state.post_content}
+                            userList={userList}
+                            clap_events={this.state.clap_event}
+                            handleAddCount={this.handleAddCount}
+                            getCountPost={this.getCountPost}
+                            />
+                        </div>
+                    </div>
+                </Paper> 
+                </MuiThemeProvider>
+                </div>
         );
         }
 }
 
-export default App;
+// export default App;
+export default withStyles(styles)(App);
