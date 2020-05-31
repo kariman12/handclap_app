@@ -57,6 +57,7 @@ class App extends React.Component {
         this.getCountPost = this.getCountPost.bind(this);
         this.getCountClapable = this.getCountClapable.bind(this);
         this.getCountClapped = this.getCountClapped.bind(this);
+        this.getClapDetail = this.getClapDetail.bind(this);
     }
 
     handleCurrentUserChange(event) {
@@ -101,8 +102,20 @@ class App extends React.Component {
         }
     }
 
+    getCountUserPostClap(user_id, current_post_id) {
+     
+        const filteredCounts = this.state.clap_event.filter((clap_event) => 
+        {
+            return (clap_event.clap_user_id === String(user_id) && clap_event.post_id === String(current_post_id))
+            // return clap_event.post_id === String(current_post_id)
+        });
+
+        return filteredCounts.length;
+    }
+
     handleAddCount(event, from_user_id, to_user_id) {
-        if (!(this.state.current_user_id === from_user_id || this.state.current_user_id === to_user_id)) {
+        if (!(this.state.current_user_id === from_user_id || this.state.current_user_id === to_user_id) &&
+            (this.getCountUserPostClap(this.state.current_user_id, event.currentTarget.value) < 15)) {
             // console.log(event.currentTarget.value + "に拍手した");
             // リダイレクト防止(?)
             event.preventDefault();
@@ -145,6 +158,83 @@ class App extends React.Component {
         });
 
         return filteredCounts.length;
+    }
+
+    getCountUserClap(user_id, filteredlist) {
+        console.log(filteredlist);
+     
+        const filteredCounts = filteredlist.filter((clap_event) => 
+        {
+            return (clap_event.clap_user_id === String(user_id))
+        });
+
+        return filteredCounts.length;
+    }
+
+    getClapDetail(current_post_id, userList) {
+        // 投稿のidを持つclapdataを取ってくる
+        const filteredlist = this.state.clap_event.filter((clap_event) => 
+        {
+            return clap_event.post_id === String(current_post_id)
+        });
+
+        // ユーザごとに並び替えするための新たな配列を定義
+        const return_list = [];
+
+        // 配列にnameとcountを追加
+        for (let i=0; i<userList.length; i++) {
+            console.log(i);
+            console.log(userList[i]);
+            if (this.getCountUserClap(i, filteredlist) > 0) {
+                return_list.push({name: userList[i].name, count: this.getCountUserClap(i, filteredlist)});
+            // console.log(this.getCountUserClap(i, filteredlist));
+            }
+        }
+
+        // console.log("return_listはこれ");
+        // console.log(return_list);
+        // console.log("並び替えしたのはこれ");
+
+        // count順に並び替え
+        return_list.sort(function(a, b) {
+            if (a.count < b.count) {
+              return 1;
+            } else {
+              return -1;
+            }
+          })
+        // console.log(return_list);
+
+        const list = return_list.map((user) => 
+        {
+            return (
+                <li>
+                    {user.name} : {user.count}
+                </li>
+            );
+        });
+
+        // const list = userList.map((user, i) => 
+        // {
+        //     console.log(user);
+        //     console.log(this.getCountUserClap(i, filteredlist));
+
+        //     return (
+        //         <li>
+        //         {user.name} : {this.getCountUserClap(i, filteredlist)}
+        //         </li>
+        //         );
+
+        //     // return (
+                
+        //     //     {user.name} : {this.getCountUserClap(i, filteredlist)}
+                
+        //     //     );
+            
+        // });
+
+        // console.log(filteredCounts.length);
+        return <ul>{list}</ul>;
     }
 
 
@@ -191,6 +281,7 @@ class App extends React.Component {
                             clap_events={this.state.clap_event}
                             handleAddCount={this.handleAddCount}
                             getCountPost={this.getCountPost}
+                            getClapDetail={this.getClapDetail}
                             />
                         </div>
                     </div>

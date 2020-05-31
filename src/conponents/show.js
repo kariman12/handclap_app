@@ -20,6 +20,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'  
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 
+import Popover from '@material-ui/core/Popover';
+
 const styles = (theme) => ({  // #1
 
     textfield: {
@@ -65,6 +67,16 @@ const styles = (theme) => ({  // #1
         textAlign: "right",
 
     },
+
+    popover: {
+        pointerEvents: 'none',
+      },
+
+    clapCount: {
+        margin: "10px",
+        padding: "10px",
+        display: 'inline-block',
+    },
     
   })
 
@@ -73,7 +85,9 @@ class Show extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          
+            anchorEl: null,
+            popover_id: null,
+     
         };
     }
 
@@ -83,6 +97,27 @@ class Show extends React.Component {
         let btn = { cursor: 'pointer' };
 
         const classes = makeStyles();
+
+        // const anchorEl = React.useState(null);
+        // const setAnchorEl = React.useState(null);
+
+        const handlePopoverOpen = (event, i) => {
+            // setAnchorEl(event.currentTarget);
+            this.setState({
+                anchorEl: event.currentTarget,
+                popover_id: i
+            });
+        };
+
+        const handlePopoverClose = () => {
+            // setAnchorEl(null);
+            this.setState({
+                anchorEl: null,
+                popover_id: null
+            });
+        };
+
+  const open = Boolean(this.state.anchorEl);
 
         return(
             <Card className={this.props.classes.card}>
@@ -139,7 +174,43 @@ class Show extends React.Component {
                                     >
                                         拍手する
                                     </Button>
-                                    <p>{this.props.getCountPost(i)}</p>
+                                    {/* <p>{this.props.getCountPost(i)}</p> */}
+
+                                    <div className={this.props.classes.clapCount}>
+                                        <Typography
+                                            aria-owns={open ? 'mouse-over-popover' : undefined}
+                                            aria-haspopup="true"
+                                            onMouseEnter={(event) => handlePopoverOpen(event, i)}
+                                            onMouseLeave={handlePopoverClose}
+                                        >
+                                            {this.props.getCountPost(i)}
+                                        </Typography>
+                                        <Popover
+                                            id="mouse-over-popover"
+                                            className={this.props.classes.popover}
+                                            classes={{
+                                            paper: classes.paper,
+                                            }}
+                                            open={open && i===this.state.popover_id}
+                                            anchorEl={this.state.anchorEl}
+                                            // anchorOrigin={{
+                                            // vertical: 'top',
+                                            // horizontal: 'left',
+                                            // }}
+                                            // transformOrigin={{
+                                            // vertical: 'top',
+                                            // horizontal: 'left',
+                                            // }}
+                                            anchorReference={this.state.anchorEl}
+                                            onClose={handlePopoverClose}
+                                            disableRestoreFocus
+                                        >
+                                            <Typography>拍手一覧</Typography>
+                                            <Typography>{this.props.getClapDetail(i, this.props.userList)}</Typography>
+                                        </Popover>
+                                    </div>
+
+
                                     </div>
                                 </ListItem>
 
