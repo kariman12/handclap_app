@@ -99,6 +99,10 @@ class App extends React.Component {
             this.setState({post_content: this.state.post_content}); // 保存完了
             // inputのvalueを空に
             e.target.text.value = '';
+            //localstrageにwrite
+            var setjson = JSON.stringify(this.state.post_content);
+            localStorage.setItem('post_content', setjson);
+
         }
     }
 
@@ -125,7 +129,10 @@ class App extends React.Component {
             this.setState({clap_event: this.state.clap_event}); // 保存完了
             // inputのvalueを空に
             // e.target.text.value = '';
-            console.log(this.state.clap_event);
+            // console.log(this.state.clap_event);
+            //localstrageにwrite
+            var setjson = JSON.stringify(this.state.clap_event);
+            localStorage.setItem('clap_event', setjson);
         }
     }
 
@@ -161,7 +168,7 @@ class App extends React.Component {
     }
 
     getCountUserClap(user_id, filteredlist) {
-        console.log(filteredlist);
+        // console.log(filteredlist);
      
         const filteredCounts = filteredlist.filter((clap_event) => 
         {
@@ -183,8 +190,8 @@ class App extends React.Component {
 
         // 配列にnameとcountを追加
         for (let i=0; i<userList.length; i++) {
-            console.log(i);
-            console.log(userList[i]);
+            // console.log(i);
+            // console.log(userList[i]);
             if (this.getCountUserClap(i, filteredlist) > 0) {
                 return_list.push({name: userList[i].name, count: this.getCountUserClap(i, filteredlist)});
             // console.log(this.getCountUserClap(i, filteredlist));
@@ -240,11 +247,41 @@ class App extends React.Component {
 
     render() {
 
-        const userList = [
+        let userList = [
             {name: "ぱんだ", image: "panda.jpg"},
             {name: "ねこ" , image: "neko.jpg"},
             {name: "はりねずみ", image: "harinezumi.jpg"}
         ];
+
+        // localStorage.setItem('myCat', 'Tom');
+        // var cat = localStorage.getItem("myCat");
+        // console.log(cat)
+
+        // localstrageにwrite
+        // localStorage.setItem('userList', JSON.stringify(userList));
+
+        // userListをlocalstrageにwrite,read
+        // localstrageにwrite
+        var setjson = JSON.stringify(userList);
+        localStorage.setItem('userList', setjson);
+
+        // localstrageからread
+        var obj = localStorage.getItem('userList');
+        userList = JSON.parse(obj);
+        console.log(userList);
+
+
+        // post_contentをlocalstrageにwrite,read
+        // localstrageからread
+        var obj2 = localStorage.getItem('post_content');
+        this.state.post_content = JSON.parse(obj2);
+        console.log(this.state.post_content);
+
+        // clap_eventをlocalstrageにwrite,read
+        // localstrageからread
+        var obj3 = localStorage.getItem('clap_event');
+        this.state.clap_event = JSON.parse(obj3);
+        console.log(this.state.clap_event);
 
 
         return (
