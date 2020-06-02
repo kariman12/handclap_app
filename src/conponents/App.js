@@ -229,14 +229,19 @@ class App extends React.Component {
         // post_contentをlocalstrageにwrite,read
         // localstrageからread
         var obj2 = localStorage.getItem('post_content');
-        this.state.post_content = JSON.parse(obj2);
+        if (obj2 != null) {
+            this.state.post_content = JSON.parse(obj2);
+        }
         console.log(this.state.post_content);
 
         // clap_eventをlocalstrageにwrite,read
         // localstrageからread
         var obj3 = localStorage.getItem('clap_event');
-        this.state.clap_event = JSON.parse(obj3);
+        if (obj3 != null) {
+            this.state.clap_event = JSON.parse(obj3);
+        }
         console.log(this.state.clap_event);
+
 
 
         return (
