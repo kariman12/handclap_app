@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fa15f645792210a7267a6771a111e162",
+    "revision": "263f88917a35acf16f687600c030ce27",
     "url": "/handclap_app/index.html"
   },
   {
-    "revision": "33a458fb620c078baf98",
+    "revision": "894962c1ff516a9b1f09",
     "url": "/handclap_app/static/css/main.df94d366.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/handclap_app/static/js/2.23f3be7d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "33a458fb620c078baf98",
-    "url": "/handclap_app/static/js/main.3177ba16.chunk.js"
+    "revision": "894962c1ff516a9b1f09",
+    "url": "/handclap_app/static/js/main.9346be99.chunk.js"
   },
   {
     "revision": "a081c57640f37851c323",
