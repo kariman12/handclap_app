@@ -212,7 +212,9 @@ class App extends React.Component {
         let userList = [
             {name: "ぱんだ", image: "panda.jpg"},
             {name: "ねこ" , image: "neko.jpg"},
-            {name: "はりねずみ", image: "harinezumi.jpg"}
+            {name: "はりねずみ", image: "harinezumi.jpg"},
+            {name: "いぬ", image: "inu.jpg"},
+            {name: "りす", image: "risu.jpg"}
         ];
 
         // userListをlocalstrageにwrite,read
